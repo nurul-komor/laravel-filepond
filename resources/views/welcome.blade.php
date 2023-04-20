@@ -6,30 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
-        rel="stylesheet" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.6.11/dist/filepond-plugin-image-preview.min.css">
+    <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
 </head>
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="filepond" class="filepond" multiple>
-    <button type="submit">Submit</button>
-</form>
-{{-- jj --}}
+
 
 <body>
-    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js">
-    </script>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" class="filepond" name="filepond" multiple data-allow-reorder="true"
+            data-max-file-size="3MB" data-max-files="3">
+        <button type="submit">Submit</button>
+    </form>
+    {{-- jj --}}
     <script
-        src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js">
+        src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.6.11/dist/filepond-plugin-image-preview.min.js">
     </script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script src="
+            https://cdn.jsdelivr.net/npm/filepond-plugin-image-edit@1.6.3/dist/filepond-plugin-image-edit.min.js
+            "></script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
     <script>
+        // import * as FilePond from "filepond"
         FilePond.registerPlugin(
-            FilePondPluginFileValidateType,
-            FilePondPluginImageExifOrientation,
-            FilePondPluginImagePreview
+            FilePondPluginImagePreview,
+            // FilePondPluginImageExifOrientation,
+            // FilePondPluginFileValidateSize,
+            FilePondPluginImageEdit
         );
         FilePond.setOptions({
             server: {
